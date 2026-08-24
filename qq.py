@@ -51,9 +51,3 @@ if st.button("開始解題", type="primary"):
             
         except Exception as e:
             st.error(f"解題失敗，請檢查 API Key 是否正確或稍後重試。\n錯誤訊息：{e}")
-            
-        st.success("解題完成！")
-        st.subheader("分析解答")
-        st.write(result)
-    else:
-        st.warning("請先輸入內容！")
