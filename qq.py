@@ -14,7 +14,7 @@ with st.sidebar:
 # 主畫面輸入區
 user_input = st.text_area("請在此輸入題目或參數：", placeholder="例如：輪班睡不著該如何調整...", height=150)
 
-# 系統提示詞（System Prompt），固定 100 核心架構的角色與輸出格式
+# 系統提示詞（System Prompt）
 SYSTEM_PROMPT = """
 你是一個精通「100 核心架構」的萬能解題專家。
 請針對使用者提出的問題進行深度分析，並提供結構化、實用且具體的解答。
@@ -35,15 +35,18 @@ if st.button("開始解題", type="primary"):
     else:
         try:
             with st.spinner("AI 正在運用 100 核心架構深度分析中..."):
-                # 設定 Gemini API Key
                 genai.configure(api_key=api_key)
                 
-                # 初始化模型
-                model = genai.GenerativeModel("gemini-1.5-flash")
-                
-                # 組合 Prompt 並發送請求
-                full_prompt = f"{SYSTEM_PROMPT}\n\n使用者問題：\n{user_input}"
-                response = model.generate_content(full_prompt)
+                # 自動嘗試相容的模型名稱
+                try:
+                    model = genai.GenerativeModel("gemini-2.5-flash")
+                    full_prompt = f"{SYSTEM_PROMPT}\n\n使用者問題：\n{user_input}"
+                    response = model.generate_content(full_prompt)
+                except Exception:
+                    # 後備使用 2.0/1.5 預設名稱
+                    model = genai.GenerativeModel("models/gemini-2.5-flash")
+                    full_prompt = f"{SYSTEM_PROMPT}\n\n使用者問題：\n{user_input}"
+                    response = model.generate_content(full_prompt)
                 
             st.success("解題完成！")
             st.subheader("分析解答")
