@@ -1,26 +1,30 @@
 import streamlit as st
 
-# 1. 網頁標題與說明
+# ==========================================
+# 1. 在這裡放你原本寫好的萬能解題核心函數/類別
+# ==========================================
+def solve_question(user_input):
+    # TODO: 貼上你的 100 核心解題邏輯與運算程式碼
+    # 例如：處理邏輯、條件判斷、文字分析等
+    
+    output_text = f"經過 100 核心架構分析：針對『{user_input}』的最佳處置方案為..."
+    return output_text
+
+# ==========================================
+# 2. Streamlit 網頁介面呈現
+# ==========================================
 st.title("100 核心架構萬能解題系統")
-st.write("輸入你的題目或數據，系統將透過 100 核心邏輯進行分析與解答。")
 
-# 2. 網頁輸入介面
-user_input = st.text_area("請在此輸入題目或參數：", placeholder="例如：輸入條件或題目內容...")
+user_input = st.text_area("請在此輸入題目或參數：", placeholder="請輸入欲分析的議題...")
 
-# 3. 執行解題按鈕與邏輯
 if st.button("開始解題"):
     if user_input.strip():
-        st.info("系統分析中...")
-        
-        # --------------------------------------------------
-        # 在此處呼叫你已經寫好的「100核心解題函數」
-        # 例如：result = your_solver_function(user_input)
-        # 以下為模擬輸出範例：
-        result = f"【解題結果】\n已成功接收輸入：\n'{user_input}'\n\n核心邏輯推導完成。"
-        # --------------------------------------------------
-        
+        with st.spinner("系統分析中..."):
+            # 呼叫你的核心解題函數
+            result = solve_question(user_input)
+            
         st.success("解題完成！")
         st.subheader("分析解答")
-        st.text(result)
+        st.write(result)
     else:
-        st.warning("請先輸入題目內容！")
+        st.warning("請先輸入內容！")
