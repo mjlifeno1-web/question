@@ -39,7 +39,7 @@ if st.button("開始解題", type="primary"):
                 genai.configure(api_key=api_key)
                 
                 # 初始化模型
-                model = genai.GenerativeModel("gemini-2.5-flash")
+                model = genai.GenerativeModel("gemini-1.5-flash")
                 
                 # 組合 Prompt 並發送請求
                 full_prompt = f"{SYSTEM_PROMPT}\n\n使用者問題：\n{user_input}"
