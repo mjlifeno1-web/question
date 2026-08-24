@@ -39,7 +39,7 @@ if st.button("開始解題", type="primary"):
                 
                 # 自動嘗試相容的模型名稱
                 try:
-                    model = genai.GenerativeModel("gemini-2.5-flash")
+                    model = genai.GenerativeModel("gemini-3.6-flash")
                     full_prompt = f"{SYSTEM_PROMPT}\n\n使用者問題：\n{user_input}"
                     response = model.generate_content(full_prompt)
                 except Exception:
