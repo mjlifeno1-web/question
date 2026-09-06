@@ -1,2 +1,7 @@
 streamlit
 google-generativeai
+streamlit
+yfinance
+pandas
+numpy
+google-genai
